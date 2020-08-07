@@ -8,4 +8,12 @@ services:
             - 24224:24224/udp
         volumes: 
             - ./log:/fluentd/log
-        
+    
+    app:
+        image: node:12-alpine
+        command: sh -c "npm install && npm run dev"
+        ports:
+        - 888:888
+        working_dir: /app
+        volumes:
+        - ./:/app
