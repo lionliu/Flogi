@@ -1,2 +1,4 @@
 # Flogi
-A Docker image to monitor Containers logs
+An application to monitor Containers logs
+
+![Flogi architecture](Microservices.png)
