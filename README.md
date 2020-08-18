@@ -1,6 +1,8 @@
 # Flogi
 Flogi (Fluentd + logs + Intelligence) in an application to monitor Containers logs with a little bit of intelligence.
 
+[Link](https://docs.google.com/presentation/d/10f2hk9IX_MxVG62aGdwb-C48a5WSrvOGnnq8ktbN3xI/edit?usp=sharing) to the project model canvas.
+
 ## Architecture
 
 ![Flogi architecture](Flogi.png)
