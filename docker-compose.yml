@@ -2,18 +2,10 @@ version: "3.8"
 
 services: 
     fluentd:
-        image: fluentd:v1.11-debian-1
+        build: ./fluentd
         ports: 
             - 24224:24224
             - 24224:24224/udp
         volumes: 
-            - ./log:/fluentd/log
+            - ./fluentd/log:/fluentd/log
     
-    app:
-        image: node:12-alpine
-        command: sh -c "npm install && npm run dev"
-        ports:
-            - 888:888
-        working_dir: /app
-        volumes:
-            - ./:/app
