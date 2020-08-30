@@ -2,6 +2,7 @@ version: "3.8"
 
 services: 
     fluentd:
+        container_name: fluentd
         build: ./fluentd
         ports: 
             - 24224:24224
@@ -11,6 +12,17 @@ services:
         links: 
             - "mongo"
     mongo:
+        container_name: mongo
         image: mongo
+    app:
+        container_name: app
+        restart: always
+        build: ./express
+        ports:
+          - "4000:4000"
+        links:
+          - mongo
+        depends_on:
+          - mongo
 
     
