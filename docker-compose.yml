@@ -8,6 +8,8 @@ services:
             - 24224:24224/udp
         volumes: 
             - ./fluentd/log:/fluentd/log
+        links: 
+            - "mongo"
     mongo:
         image: mongo
 
