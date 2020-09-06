@@ -2,7 +2,7 @@
   "name": "flogi",
   "version": "1.0.0",
   "description": "Node application to offer an intelligent use of logs",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev": "nodemon app.js"
   },
@@ -18,6 +18,8 @@
   "homepage": "https://github.com/lionliu/Flogi#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "mongodb": "^3.6.0",
+    "mongoose": "^5.10.2",
     "nodemon": "^2.0.4"
   }
 }

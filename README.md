@@ -10,12 +10,7 @@ Flogi (Fluentd + logs + Intelligence) in an application to monitor Containers lo
 
 ## Running the Project
 
-1. Run: 
-
-```
-docker-compose -f docker-compose.yml \          
-     up -d --build
-```
+1. Run: `docker-compose up -d --build`
 
 ## Stopping the Project
 
