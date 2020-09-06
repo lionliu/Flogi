@@ -1,5 +1,5 @@
+import { Schema } from 'mongoose';
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
 
 const logSchema = new Schema({
   container_id: {
@@ -24,4 +24,4 @@ const logSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('logs', logSchema);
+export const log = mongoose.model('logs', logSchema);
