@@ -7,7 +7,8 @@ const PORT = 4000;
 
 
 mongoose.connect(config.DB, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
   })
   .then(() => {
     console.log('MongoDB Connected');
@@ -16,9 +17,20 @@ mongoose.connect(config.DB, {
     console.log(error);
   });
 
+app.get("/", function (req, res) {
+  res.json({hello: "world"})
+});
 
-app.get('/', function(req, res) {
-    res.json({"hello": "world"});
+app.get('/collections', function(req, res) {
+
+  mongoose.connection.db.listCollections().toArray(function (err, collection) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json({ collections: collection });
+    }
+  });
+    
 });
 
 app.listen(PORT, function(){
