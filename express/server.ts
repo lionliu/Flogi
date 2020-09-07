@@ -1,10 +1,9 @@
-import { dbConfig } from './db';
-import { Mongoose } from 'mongoose';
+import { dbConfig } from './config/db';
+import mongoose  from 'mongoose';
 import express = require("express");
 
 const PORT = 4000;
 const app = express();
-let mongoose: Mongoose;
 
 function connectToDB(): void {
   mongoose.connect(dbConfig.DB, {
