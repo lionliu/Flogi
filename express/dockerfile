@@ -4,4 +4,4 @@ COPY package.json /app
 RUN npm install
 COPY . /app
 CMD npm run build && cd dist && node server.js
-EXPOSE 4000
+EXPOSE 4000 5000
