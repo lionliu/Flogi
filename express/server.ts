@@ -44,9 +44,7 @@ function connectToDB(): void {
 }
 
 function configExpress(): void {
-  // app.get("/", (req, res) => {
-  //   res.json({hello: "world"})
-  // });
+
 
   app.get('/collections', (req, res) => {
 
@@ -60,7 +58,7 @@ function configExpress(): void {
   });
 
    app.get("/logs", (req, res) => {
-      // let container_name = req.query.container_name
+
 
       let query: { [index: string]: any } = {
         container_id: req.query.container_id || "",
@@ -82,20 +80,6 @@ function configExpress(): void {
          res.status(400).json({ msg: "Log not found" });
        });
    });
-
-  //  app.get("/logs/:container_name", (req, res) => {
-  //    console.log(req.params);
-  //    log
-  //      .findOne({
-  //        container_name: req.params.container_name,
-  //      })
-  //      .then((data: Object) => {
-  //        res.json(data);
-  //      })
-  //      .catch(() => {
-  //        res.status(400).json({ msg: "Log not found" });
-  //      });
-  //  });
 
   app.listen(PORT, () => {
       console.log('Your node js server is running on PORT:', PORT);
