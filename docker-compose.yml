@@ -1,6 +1,20 @@
 version: "3.8"
 
 services: 
+    elasticsearch:
+        image: elasticsearch:6.8.12
+        expose:
+          - 9200
+        ports:
+          - "9200:9200"
+    kibana:
+        image: kibana:6.8.12
+        links:
+          - "elasticsearch"
+        ports:
+          - "5601:5601"
+        depends_on: 
+          - elasticsearch
     fluentd:
         container_name: fluentd
         build: ./fluentd
@@ -10,22 +24,9 @@ services:
         volumes: 
             - ./fluentd/log:/fluentd/log
         links: 
-            - "mongo"
-    mongo:
-        container_name: mongo
-        image: mongo
-        ports:
-          - "27017:27017"
-    app:
-        container_name: app
-        restart: always
-        build: ./express
-        ports:
-          - "4000:4000"
-          - "5000:5000"
-        links:
-          - mongo
-        depends_on:
-          - mongo
+            - "elasticsearch"
+        depends_on: 
+            - elasticsearch
+            
 
     
