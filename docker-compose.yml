@@ -2,19 +2,31 @@ version: "3.8"
 
 services: 
     elasticsearch:
-        image: elasticsearch:6.8.12
-        expose:
-          - 9200
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.9.2
+        container_name: elasticsearch
         ports:
-          - "9200:9200"
+            - "9200:9200"
+        networks:
+            - elastic
+        environment:
+            - node.name=elasticsearch
+            - cluster.name=es-docker-cluster
+            - bootstrap.memory_lock=false
+            - cluster.initial_master_nodes=elasticsearch
+            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+
     kibana:
-        image: kibana:6.8.12
+        image: docker.elastic.co/kibana/kibana:7.9.2
+        container_name: kibana
         links:
-          - "elasticsearch"
+            - "elasticsearch"
         ports:
-          - "5601:5601"
-        depends_on: 
-          - elasticsearch
+            - 5601:5601
+        environment:
+            ELASTICSEARCH_URL: http://elasticsearch:9200
+            ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+        networks:
+            - elastic
     fluentd:
         container_name: fluentd
         build: ./fluentd
@@ -23,10 +35,26 @@ services:
             - 24224:24224/udp
         volumes: 
             - ./fluentd/log:/fluentd/log
-        links: 
-            - "elasticsearch"
-        depends_on: 
-            - elasticsearch
-            
-
-    
+        networks: 
+            - elastic
+    metricbeat:
+        image: docker.elastic.co/beats/metricbeat:7.9.2  
+        container_name: metricbeat
+        user: root
+        environment:
+            - setup.kibana.host=kibana:5601
+            - dashboards.enable=true
+            # - output.elasticsearch.hosts=["elasticsearch:9200"]
+            # - logging.level=debug
+            - system.hostfs=/hostfs
+        networks: 
+            - elastic
+        volumes:
+            - ./metricbeat.yml:/usr/share/metricbeat/metricbeat.yml
+            - ./modules.d/:/usr/share/metricbeat/modules.d/
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /:/hostfs:ro
+        restart: on-failure
+networks:
+    elastic:
+        driver: bridge
