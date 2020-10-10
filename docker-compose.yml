@@ -55,6 +55,17 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock
             - /:/hostfs:ro
         restart: on-failure
+    clusterizer:
+        container_name: clusterizer
+        build: ./clusterizer
+        volumes:
+            - ./clusterizer:/home/jovyan/work/
+        # environment:
+        #     - NotebookApp.password=flogi
+        ports:
+            - "8888:8888"
+        networks: 
+            - elastic
 networks:
     elastic:
         driver: bridge
