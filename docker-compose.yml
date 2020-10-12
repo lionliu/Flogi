@@ -43,9 +43,7 @@ services:
         user: root
         environment:
             - setup.kibana.host=kibana:5601
-            - dashboards.enable=true
-            # - output.elasticsearch.hosts=["elasticsearch:9200"]
-            # - logging.level=debug
+            - setup.dashboards.enable=true
             - system.hostfs=/hostfs
         networks: 
             - elastic
