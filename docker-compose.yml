@@ -48,8 +48,8 @@ services:
         networks: 
             - elastic
         volumes:
-            - ./metricbeat.yml:/usr/share/metricbeat/metricbeat.yml
-            - ./modules.d/:/usr/share/metricbeat/modules.d/
+            - ./metricbeat/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml
+            - ./metricbeat/modules.d/:/usr/share/metricbeat/modules.d/
             - /var/run/docker.sock:/var/run/docker.sock
             - /:/hostfs:ro
         restart: on-failure

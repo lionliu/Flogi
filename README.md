@@ -5,7 +5,7 @@ Flogi (Fluentd + logs + Intelligence) in an application to monitor Containers lo
 
 ## Architecture
 
-![Flogi architecture](Flogi.png)
+![Flogi architecture](./assets/Flogi.png)
 
 
 ## Running the Project
