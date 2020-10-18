@@ -27,6 +27,10 @@ services:
             ELASTICSEARCH_HOSTS: http://elasticsearch:9200
         networks:
             - elastic
+        depends_on:
+            - "elasticsearch"
+            - "fluentd"
+            - "metricbeat"
     fluentd:
         container_name: fluentd
         build: ./fluentd
