@@ -121,3 +121,5 @@ dist
 
 # DS_store
 .DS_store
+
+./clusterizer/.ipynb_checkpoints/
