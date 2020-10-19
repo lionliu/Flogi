@@ -70,6 +70,12 @@ bash start.sh
     *  Click the hambuguer button
     *  Select discover
 
+## Accessing the clusterizer
+
+1. After running the steps above, get the clusterizer address with the following command:
+```
+docker logs clusterizer
+```
 
 ## Stopping the Project
 
