@@ -27,6 +27,10 @@ services:
             ELASTICSEARCH_HOSTS: http://elasticsearch:9200
         networks:
             - elastic
+        depends_on:
+            - "elasticsearch"
+            - "fluentd"
+            - "metricbeat"
     fluentd:
         container_name: fluentd
         build: ./fluentd
@@ -43,15 +47,13 @@ services:
         user: root
         environment:
             - setup.kibana.host=kibana:5601
-            - dashboards.enable=true
-            # - output.elasticsearch.hosts=["elasticsearch:9200"]
-            # - logging.level=debug
+            - setup.dashboards.enable=true
             - system.hostfs=/hostfs
         networks: 
             - elastic
         volumes:
-            - ./metricbeat.yml:/usr/share/metricbeat/metricbeat.yml
-            - ./modules.d/:/usr/share/metricbeat/modules.d/
+            - ./metricbeat/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml
+            - ./metricbeat/modules.d/:/usr/share/metricbeat/modules.d/
             - /var/run/docker.sock:/var/run/docker.sock
             - /:/hostfs:ro
         restart: on-failure
