@@ -90,6 +90,8 @@ docker logs clusterizer
 * Docker
 * jupyter notebook
 
+## Link to the project article (in portuguese)
+https://docs.google.com/document/d/1_QJ-v5JtKj_vwdGG-jf4hQ2P8u4Gq_Fcojd-hw5BFvw/edit?usp=sharing
 ## Team
 
 1. João Lira: <jpls@cin.ufpe.br>
